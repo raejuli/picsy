@@ -33,6 +33,8 @@ import {Reel} from './Reel';
     app.stage.addChild(reelsContainer);
 
     const reelsMask = new Graphics().rect(0, 280, 280 * 5, 280 * 3).fill({color: {r: 25, g: 50, b: 100}});
+    // const testMask = new Graphics().rect(280, 280, 280 * 5, 280 * 3).fill({color: {r: 25, g: 50, b: 100}});
+    // app.stage.addChild(testMask);
 
     const reel = new Reel();
     await reel.init({
@@ -40,6 +42,9 @@ import {Reel} from './Reel';
         mask: reelsMask,
         height: 3,
         symbolHeight: 280,
-        symbolWidth: 280
+        symbolWidth: 280,
+        ticker: app.ticker
     });
+
+    reel.startSpin();
 })();
