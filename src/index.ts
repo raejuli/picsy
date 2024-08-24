@@ -1,7 +1,8 @@
 
-import {Application, Assets, Container, Graphics, Sprite} from 'pixi.js';
-import {AssetLoader} from './AssetLoad';
+import {Application, Assets, Container, Graphics, Sprite, Ticker} from 'pixi.js';
+import {AssetLoader} from './AssetLoader';
 import {Reel} from './Reel';
+import {SymbolType} from './GameData';
 
 (async () =>
 {
@@ -47,4 +48,18 @@ import {Reel} from './Reel';
     });
 
     reel.startSpin();
+
+    let timeTilStop = 5;
+    const stopSpinCallback = (ticker: Ticker) =>
+    {
+        timeTilStop -= ticker.deltaTime;
+
+        if(timeTilStop <= 0)
+        {
+            reel.stopSpin([SymbolType.HIGH, SymbolType.HIGH, SymbolType.HIGH, SymbolType.HIGH, SymbolType.HIGH]);
+            app.ticker.remove(stopSpinCallback, this);
+        }
+    };
+
+    app.ticker.add(stopSpinCallback, this)
 })();
