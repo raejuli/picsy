@@ -30,12 +30,12 @@ import {SymbolType} from './GameData';
         image.rotation += 0.1 * ticker.deltaTime;
     });
 
-    const reelsContainer = new Container({x: 0, y: 280});
+    const reelsContainer = new Container({x: 0, y: 560});
     app.stage.addChild(reelsContainer);
 
     const reelsMask = new Graphics().rect(0, 280, 280 * 5, 280 * 3).fill({color: {r: 25, g: 50, b: 100}});
-    // const testMask = new Graphics().rect(280, 280, 280 * 5, 280 * 3).fill({color: {r: 25, g: 50, b: 100}});
-    // app.stage.addChild(testMask);
+    const testMask = new Graphics().rect(280, 0, 280 * 5, 280 * 3).fill({color: {r: 25, g: 50, b: 100}});
+    reelsContainer.addChild(testMask);
 
     const reel = new Reel();
     await reel.init({

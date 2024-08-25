@@ -29,7 +29,7 @@ export class Reel
             const texture = await Assets.load('assets/test.png');
             const sprite = new Sprite(texture);
             sprite.y = i * config.symbolHeight;
-            sprite.mask = config.mask;
+            // sprite.mask = config.mask;
             this._symbols.push(sprite);
             config.root.addChild(sprite);
         }
@@ -64,15 +64,20 @@ export class Reel
 
         if(this._top > -1)
         {
+            this._top = -2;
             config.root.removeChild(this._symbols.pop()!);
             const texture = await Assets.load('assets/test.png');
             const sprite = new Sprite(texture);
             sprite.y = this._top * config.symbolHeight;
-            sprite.mask = config.mask;
+            // sprite.mask = config.mask;
             this._symbols.unshift(sprite);
             config.root.addChild(sprite);
 
-            this._top -= 1;
+            for(let i = 1; i < this._symbols.length; i++)
+            {
+                const symbol = this._symbols[i];
+                symbol.y = (i - 2) * config.symbolHeight;
+            }
 
             if(canStop)
             {
