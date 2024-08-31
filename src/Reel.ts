@@ -8,6 +8,7 @@ export interface ReelConfig
     height: number;
     symbolHeight: number;
     symbolWidth: number;
+    xOffset: number;
     ticker: Ticker
 }
 
@@ -17,7 +18,6 @@ export class Reel
     private _top: number = -1;
     private _config!: ReelConfig;
     private _stopping: boolean = false;
-    private _timeToStop: number = 1;
     private _landingSymbols: SymbolType[] = [];
 
     public async init(config: ReelConfig): Promise<void>
@@ -29,6 +29,7 @@ export class Reel
             const texture = await Assets.load('assets/test.png');
             const sprite = new Sprite(texture);
             sprite.y = i * config.symbolHeight;
+            sprite.x = config.xOffset;
             // sprite.mask = config.mask;
             this._symbols.push(sprite);
             config.root.addChild(sprite);
@@ -43,16 +44,15 @@ export class Reel
     private async _update(ticker: Ticker): Promise<void>
     {
         const config = this._config;
-        let speed = 5;
+        let speed = 3;
 
         if(this._stopping)
         {
-            this._timeToStop -= ticker.deltaTime / 1000;
-            speed = 2;
+            speed = 1;
         }
 
-        const canStop = this._stopping && this._timeToStop <= 0;
-        const distance = speed * ticker.deltaTime;
+        const distance = speed * config.symbolHeight * ticker.elapsedMS / 1000;
+        console.log(ticker.deltaTime);
 
         for(let i = 0; i < this._symbols.length; i++)
         {
@@ -64,11 +64,20 @@ export class Reel
 
         if(this._top > -1)
         {
+            if(this._stopping && this._landingSymbols.length === 0)
+            {
+                console.log("all symbols added and stopped");
+                this._config.ticker.remove(this._update, this);
+
+                return;
+            }
+
             this._top = -2;
             config.root.removeChild(this._symbols.pop()!);
             const texture = await Assets.load('assets/test.png');
             const sprite = new Sprite(texture);
             sprite.y = this._top * config.symbolHeight;
+            sprite.x = config.xOffset;
             // sprite.mask = config.mask;
             this._symbols.unshift(sprite);
             config.root.addChild(sprite);
@@ -79,15 +88,9 @@ export class Reel
                 symbol.y = (i - 2) * config.symbolHeight;
             }
 
-            if(canStop)
+            if(this._stopping)
             {
                 const symbolType = this._landingSymbols.pop();
-
-                if(this._landingSymbols.length === 0)
-                {
-                    console.log("all symbols added and stopped");
-                    this._config.ticker.remove(this._update, this);
-                }
             }
         }
     }
