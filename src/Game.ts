@@ -4,12 +4,14 @@ import {Reel} from "./Reel";
 export interface ReelsConfig
 {
     app: Application;
+    columns: number;
+    rows: number;
 }
 
 export class Game
 {
     private _app!: Application;
-    private _reels!: Reel[];
+    private _reels: Reel[] = [];
 
     public async init(): Promise<void>
     {
@@ -23,15 +25,15 @@ export class Game
 
         document.body.appendChild(app.canvas);
 
-        await this._addReels({app});
+        await this._addReels({app, columns: 5, rows: 3});
     }
 
     private async _update(): Promise<void>
     {
-
+        // stub
     }
 
-    private async _addReels({app}: ReelsConfig): Promise<void>
+    private async _addReels({app, columns, rows}: ReelsConfig): Promise<void>
     {
         const reelsContainer = new Container({x: 0, y: 560});
         app.stage.addChild(reelsContainer);
@@ -40,28 +42,21 @@ export class Game
         const testMask = new Graphics().rect(280, 0, 280 * 5, 280 * 3).fill({color: {r: 25, g: 50, b: 100}});
         reelsContainer.addChild(testMask);
 
-        const reel = new Reel();
-        const reel2 = new Reel();
-        await reel.init({
-            root: reelsContainer,
-            mask: reelsMask,
-            height: 3,
-            xOffset: 0,
-            symbolHeight: 280,
-            symbolWidth: 280,
-            ticker: app.ticker
-        });
-        await reel2.init({
-            root: reelsContainer,
-            mask: reelsMask,
-            height: 3,
-            xOffset: 280,
-            symbolHeight: 280,
-            symbolWidth: 280,
-            ticker: app.ticker
-        });
+        for(let i = 0; i < columns; i++)
+        {
+            const r = new Reel();
+            await r.init({
+                root: reelsContainer,
+                mask: reelsMask,
+                height: rows,
+                xOffset: i * 280,
+                symbolHeight: 280,
+                symbolWidth: 280,
+                ticker: app.ticker
+            });
 
-        this._reels = [reel, reel2];
+            this._reels.push(r);
+        }
     }
 
     public get reels(): Reel[]

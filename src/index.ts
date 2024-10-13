@@ -15,8 +15,10 @@ import {SymbolType} from './GameData';
     const reels = game.reels;
     const app = game.app;
 
-    reels[0].startSpin();
-    reels[1].startSpin();
+    for(const reel of reels)
+    {
+        reel.startSpin();
+    }
 
     let timeTilStop = 5000;
     const stopSpinCallback = (ticker: Ticker) =>
