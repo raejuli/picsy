@@ -1,5 +1,5 @@
-import {Pipeline} from "./PipeLine";
-import {Configurable, IExecutable} from "./types";
+import {Pipeline} from "./Pipeline";
+import {Configurable, IExecutable} from "./Types";
 
 export interface PipeNodeConfig
 {
