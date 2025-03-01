@@ -5,7 +5,7 @@ export interface PipelineConfig extends PipeNodeConfig
 
 }
 
-export class Pipeline<TInput extends Object | undefined = Object | undefined, TResult extends Object | undefined = Object | undefined> extends PipeNode<PipelineConfig, TInput, TResult>
+export class Pipeline<TConfig extends PipeNodeConfig = PipelineConfig, TInput extends Object | undefined = Object | undefined, TResult extends Object | undefined = Object | undefined> extends PipeNode<TConfig, TInput, TResult>
 {
     protected _currentNodeIndex = 0;
     protected _input!: TInput;

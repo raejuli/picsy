@@ -5,7 +5,7 @@ export interface StateConfig extends PipelineConfig
 {
 }
 
-export class State<TInput extends Object | undefined = Object | undefined, TResult extends Object | undefined = Object | undefined> extends Pipeline<TInput, TResult>
+export class State<TInput extends Object | undefined = Object | undefined, TResult extends Object | undefined = Object | undefined> extends Pipeline<StateConfig, TInput, TResult>
 {
     protected _pipeCompleteCount = 0;
     protected readonly _nodes: Pipeline[] = [];

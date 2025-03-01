@@ -1,5 +1,6 @@
 import {Application, Container, Graphics} from "pixi.js";
 import {Reel} from "./Reel";
+import {BeginSpinPipeLine} from "./game/pipes/beginSpin/BeginSpinPipeLine";
 
 export interface ReelsConfig
 {
@@ -26,6 +27,11 @@ export class Game
         document.body.appendChild(app.canvas);
 
         await this._addReels({app, columns: 5, rows: 3});
+
+        console.log("beginning test of pipes");
+        const beginSpinPipe = new BeginSpinPipeLine({});
+        beginSpinPipe.registerNode(new BeginSpinPipeLine({}));
+        beginSpinPipe.execute(undefined);
     }
 
     private async _update(): Promise<void>
