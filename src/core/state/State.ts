@@ -1,5 +1,4 @@
-import {Pipeline, PipelineConfig} from "../pipeline/PipeLine";
-import {PipeNode} from "../pipeline/PipeNode";
+import {Pipeline, PipelineConfig} from "../pipeline";
 
 
 export interface StateConfig extends PipelineConfig

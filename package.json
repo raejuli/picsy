@@ -3,14 +3,17 @@
     "description": "A picsy project",
     "scripts": {
         "dev": "webpack serve",
-        "build": "webpack"
+        "build": "webpack",
+        "test": "jest"
     },
     "author": "Me",
     "devDependencies": {
+        "@jest/globals": "^29.7.0",
         "clean-webpack-plugin": "^4.0.0",
         "copy-webpack-plugin": "^12.0.0",
         "html-webpack-plugin": "^5.0.0",
         "prettier": "2.0.4",
+        "ts-jest": "^29.2.6",
         "ts-loader": "^9.0.0",
         "typescript": "^5.0.0",
         "webpack": "^5.0.0",
