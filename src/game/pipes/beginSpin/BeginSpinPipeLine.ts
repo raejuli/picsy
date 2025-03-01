@@ -1,7 +1,7 @@
 import {Pipeline} from "../../../core";
 import {StartSpinNode} from "./StartSpinNode";
 
-export interface BeginSpinPipeLineConfig
+export interface BeginSpinPipelineConfig
 {
 
 }
@@ -11,9 +11,9 @@ export interface BeginSpinPipeLineConfig
  * I think generating the 'spin result' pipeline should most likey be done
  * in the parsing of the commands registering pipes given commands in the response data
  */
-export class BeginSpinPipeLine extends Pipeline<BeginSpinPipeLineConfig>
+export class BeginSpinPipeline extends Pipeline<BeginSpinPipelineConfig>
 {
-    constructor(config: BeginSpinPipeLineConfig)
+    constructor(config: BeginSpinPipelineConfig)
     {
         super(config);
 

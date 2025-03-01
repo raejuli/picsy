@@ -1,4 +1,4 @@
-export class Configurable<TConfig = unknown>
+export class Configurable<TConfig>
 {
     protected _config: TConfig;
 

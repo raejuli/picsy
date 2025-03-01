@@ -1,6 +1,6 @@
 import {Application, Container, Graphics} from "pixi.js";
 import {Reel} from "./Reel";
-import {BeginSpinPipeLine} from "./game/pipes/beginSpin/BeginSpinPipeLine";
+import {BeginSpinPipeline} from "./game/pipes/beginSpin/BeginSpinPipeLine";
 import {CommandState} from "./core";
 
 export interface ReelsConfig
@@ -31,9 +31,9 @@ export class Game
 
         console.log("beginning test of pipes");
         const beginSpinCommandState = new CommandState({});
-        const beginSpinPipe = new BeginSpinPipeLine({});
+        const beginSpinPipe = new BeginSpinPipeline({});
         beginSpinCommandState.registerNode(beginSpinPipe);
-        beginSpinPipe.registerNode(new BeginSpinPipeLine({}));
+        beginSpinPipe.registerNode(new BeginSpinPipeline({}));
         beginSpinCommandState.execute(undefined);
     }
 
