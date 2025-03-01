@@ -52,7 +52,7 @@ export class Reel
         }
 
         const distance = speed * config.symbolHeight * ticker.elapsedMS / 1000;
-        console.log(ticker.deltaTime);
+        // console.log(ticker.deltaTime);
 
         for(let i = 0; i < this._symbols.length; i++)
         {

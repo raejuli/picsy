@@ -1,6 +1,7 @@
 import {Application, Container, Graphics} from "pixi.js";
 import {Reel} from "./Reel";
 import {BeginSpinPipeLine} from "./game/pipes/beginSpin/BeginSpinPipeLine";
+import {CommandState} from "./core";
 
 export interface ReelsConfig
 {
@@ -29,9 +30,11 @@ export class Game
         await this._addReels({app, columns: 5, rows: 3});
 
         console.log("beginning test of pipes");
+        const beginSpinCommandState = new CommandState({});
         const beginSpinPipe = new BeginSpinPipeLine({});
+        beginSpinCommandState.registerNode(beginSpinPipe);
         beginSpinPipe.registerNode(new BeginSpinPipeLine({}));
-        beginSpinPipe.execute(undefined);
+        beginSpinCommandState.execute(undefined);
     }
 
     private async _update(): Promise<void>
