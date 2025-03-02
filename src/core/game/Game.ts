@@ -1,4 +1,5 @@
 import {Configurable} from "../pipeline";
+import {ResourceLocator} from "../services/ResourceLocator";
 
 export interface GameConfig
 {
@@ -18,17 +19,30 @@ export class Game extends Configurable<GameConfig>
          */
     }
 
-    protected initResourceLocator(): void
+    protected _initResourceLocator(): void
+    {
+        // todo
+        ResourceLocator.init({} as any)
+    }
+
+    protected _initPixi(): void
     {
 
     }
 
-    protected initPixi(): void
+    /**
+     * todo
+     * create the base states of the game
+     * and store them
+     * these should be passed into the command processor
+     */
+    protected _initCommandStates(): void
     {
 
     }
 
-    protected initCommandStates(): void
+
+    protected _initCommandProcessor(): void
     {
 
     }

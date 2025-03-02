@@ -11,15 +11,20 @@ export interface ResourceLocatorConfig
 
 export class ResourceLocator
 {
-    private static _instance?: ResourceLocator;
+    private static _instance: ResourceLocator;
 
-    private constructor()
+    private constructor(config: ResourceLocatorConfig)
     {
+    }
+
+    public static init(config: ResourceLocatorConfig): void
+    {
+        this._instance = this._instance ?? new ResourceLocator(config);
     }
 
     public static get(): ResourceLocator
     {
-        return this._instance ?? new ResourceLocator();
+        return this._instance;
     }
 
     public get networkHandler(): NetworkHandler
