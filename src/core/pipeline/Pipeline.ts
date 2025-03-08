@@ -13,6 +13,11 @@ export class Pipeline<TConfig extends PipeNodeConfig = PipelineConfig, TInput ex
 
     public build<TBuildConfig = unknown>(buildConfig?: TBuildConfig): void
     {
+        /**
+         * todo
+         * this is called for now so that 'this' pipeline can take in config of some type
+         * maybe idk
+         */
         // stub
     }
 

@@ -1,7 +1,15 @@
-import {State} from "./State";
+import {CommandStateProcessor} from "./CommandStateProcessor";
+import {State, StateConfig} from "./State";
 
-export class CommandState<TInput extends Object | undefined = Object | undefined, TResult extends Object | undefined = Object | undefined> extends State<TInput, TResult>
+export interface CommandStateConfig extends StateConfig
 {
+    commandStateProcessorConstructor: new () => CommandStateProcessor;
+}
+
+export class CommandState<TConfig extends CommandStateConfig = CommandStateConfig, TInput extends Object | undefined = Object | undefined, TResult extends Object | undefined = Object | undefined> extends State<TConfig, TInput, TResult>
+{
+    private _processor: CommandStateProcessor = new this._config.commandStateProcessorConstructor();
+
     public execute(input: TInput): void
     {
         console.log("executing command state");
