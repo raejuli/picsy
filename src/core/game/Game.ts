@@ -34,7 +34,7 @@ export class Game extends Configurable<GameConfig>
      * todo
      * create the base states of the game
      * and store them
-     * these should be passed into the command processor
+     * these should be passed into the command
      */
     protected _initCommandStates(): void
     {

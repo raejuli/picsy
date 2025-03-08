@@ -11,6 +11,11 @@ export class Pipeline<TConfig extends PipeNodeConfig = PipelineConfig, TInput ex
     protected _input!: TInput;
     protected readonly _nodes: PipeNode[] = [];
 
+    public build<TBuildConfig = unknown>(buildConfig?: TBuildConfig): void
+    {
+        // stub
+    }
+
     public execute(input: TInput): void
     {
         this._input = input;
@@ -40,5 +45,11 @@ export class Pipeline<TConfig extends PipeNodeConfig = PipelineConfig, TInput ex
 
             this._nodes[this._currentNodeIndex].execute(input);
         }
+    }
+
+    public reset(): void
+    {
+        this._currentNodeIndex = 0;
+        this._nodes.splice(0, this._nodes.length);
     }
 }
